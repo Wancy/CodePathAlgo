@@ -1,0 +1,15 @@
+public class Solution {
+	public ListNode detectCycle(ListNode a) {
+        HashSet<ListNode> set = new HashSet<ListNode>();
+        ListNode pointer = a;
+        while (pointer != null) {
+            if (set.contains(pointer)) {
+                return pointer;
+            } else {
+                set.add(pointer);
+                pointer = pointer.next;
+            }
+        }
+	    return null;
+	}
+}
