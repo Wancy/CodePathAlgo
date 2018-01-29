@@ -1,0 +1,31 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    //S: "barfoothefoobarman"
+    //L: ["foo", "bar"]
+    public ArrayList<Integer> findSubstring(String A, final List<String> B) {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        
+        int len = B.get(0).length() * B.size();
+        for (int i = 0; i < A.length() - len + 1; i++) {
+            if (helper(A.substring(i, i + len), B)) {
+                result.add(i);
+            }
+        }
+        return result;
+        
+    }
+    
+    private boolean helper(String str, final List<String> B) {
+        List<String> set = new ArrayList<String>(B);
+        int len = B.get(0).length();
+        for (int i = 0; i < str.length(); i += len) {
+            String s = str.substring(i, i + len);
+            if (!set.contains(s)) {
+                return false;
+            } else {
+                set.remove(s);
+            }
+        }
+        return set.isEmpty() ? true : false;
+    }
+}
