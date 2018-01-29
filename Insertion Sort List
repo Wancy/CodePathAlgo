@@ -1,0 +1,34 @@
+public class Solution {
+    //Input : 1 -> 3 -> 2
+    public ListNode insertionSortList(ListNode A) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = A;
+        ListNode sorted = dummy;
+        ListNode prev = dummy;
+        ListNode curr = A;
+        ListNode tail = dummy;
+        while (curr != null) {
+            sorted = dummy;
+            while (sorted != tail && (curr.val >= sorted.next.val)) {
+                sorted = sorted.next;
+            }
+            if (sorted == tail) {
+                curr = curr.next;
+                prev = prev.next;
+                tail = tail.next;
+                continue;
+            }
+            helper(sorted, curr, prev);
+            curr = tail.next;
+            
+        }
+        return dummy.next;
+    }
+    
+    private void helper(ListNode sorted, ListNode curr, ListNode prev) {
+        ListNode next = sorted.next;
+        sorted.next = curr;
+        prev.next = curr.next;
+        curr.next = next;
+    }
+}
