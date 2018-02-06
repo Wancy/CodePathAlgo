@@ -1,0 +1,44 @@
+public class Solution {
+	// DO NOT MODIFY THE LIST
+	public int search(final List<Integer> a, int b) {
+	    int min = findMin(a);
+	    int start = 0;
+	    int end = a.size() - 1;
+	    if (a.get(end) < b) {
+	        end = min - 1;
+	    } else {
+	        start = min;
+	    }
+	    
+	    int mid = 0;
+	    while (start + 1 < end) {
+	        mid = start + (end - start) / 2;
+	        if (a.get(mid) == b) {
+	            return mid;
+	        } else if (a.get(mid) < b) {
+	            start = mid;
+	        } else {
+	            end = mid;
+	        }
+	    }
+	    if (a.get(start) == b) return start;
+	    if (a.get(end) == b) return end;
+	    return -1;
+	}
+	
+	private int findMin(final List<Integer> a) {
+	    int start = 0;
+	    int end = a.size() - 1;
+	    int mid = 0;
+	    while (start + 1 < end) {
+	        mid = start + (end - start) / 2;
+	        if (a.get(mid) < a.get(end)) {
+	            end = mid;
+	        } else {
+	            start = mid;
+	        }
+	    }
+	    if (a.get(start) <= a.get(end)) return start;
+	    return end;
+	}
+}
