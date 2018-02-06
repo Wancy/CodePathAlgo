@@ -1,0 +1,23 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsetsWithDup(ArrayList<Integer> A) {
+        Collections.sort(A);
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        helper(0, A, res, new ArrayList<Integer>(), new boolean[A.size()]);
+        return res;
+    }
+    
+    private void helper(int pos, ArrayList<Integer> A, ArrayList<ArrayList<Integer>> res, 
+        ArrayList<Integer> list, boolean[] visited) {
+        res.add(new ArrayList<Integer>(list));
+        for (int i = pos; i < A.size(); i++) {
+            if (visited[i] || (i != 0 && 
+                A.get(i - 1) == A.get(i) && !visited[i - 1])) continue;
+            list.add(A.get(i));
+            visited[i] = true;
+            helper(i + 1, A, res, list, visited);
+            list.remove(list.size() - 1);
+            visited[i] = false;
+        }
+        
+    }
+}
