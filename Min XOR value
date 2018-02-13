@@ -1,0 +1,10 @@
+public class Solution {
+    public int findMinXor(ArrayList<Integer> A) {
+        Collections.sort(A);
+        int res = Integer.MAX_VALUE;
+        for (int i = 1; i < A.size(); i++) {
+            res = Math.min(A.get(i) ^ A.get(i - 1), res);
+        }
+        return res;
+    }
+}
