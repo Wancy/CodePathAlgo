@@ -1,0 +1,34 @@
+public class Solution {
+	public void solve(ArrayList<ArrayList<Character>> a) {
+	    for (int i = 0; i < a.size(); i++) {
+	        for (int j = 0; j < a.get(0).size(); j++) {
+	            if ((i == 0 || j == 0 || i == a.size() - 1 || j == a.get(0).size() - 1)
+	                && (a.get(i).get(j) == 'O')) {
+	                    helper(a, i, j);
+	            }
+	        }
+	    }
+	    for (int i = 0; i < a.size(); i++) {
+	        for (int j = 0; j < a.get(0).size(); j++) {
+	            if (a.get(i).get(j) == 'O') {
+	                a.get(i).set(j, 'X');
+	            } else if (a.get(i).get(j) == 'Y') {
+	                a.get(i).set(j, 'O');
+	            }
+	            
+	        }
+	    }
+	    
+	}
+	
+	private void helper(ArrayList<ArrayList<Character>> a, int row, int col) {
+	    if (row < 0 || col < 0 || row > a.size() - 1 || col > a.get(0).size() - 1)
+	        return;
+	    if (a.get(row).get(col) == 'X' || a.get(row).get(col) == 'Y') return;
+	    a.get(row).set(col, 'Y');
+	    helper(a, row + 1, col);
+	    helper(a, row - 1, col);
+	    helper(a, row, col + 1);
+	    helper(a, row, col - 1);
+	}
+}
