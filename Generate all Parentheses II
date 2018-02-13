@@ -1,0 +1,25 @@
+public class Solution {
+    public ArrayList<String> generateParenthesis(int A) {
+        ArrayList<String> res = new ArrayList<String>();
+        generateParenthesis(A, res, 0, 0, new StringBuilder());
+        return res;
+    }
+    
+    private void generateParenthesis(int A, ArrayList<String> res, 
+        int left, int right, StringBuilder sb) {
+        if (sb.length() == 2 * A) {
+            res.add(sb.toString());
+            return;
+        }
+        if (left < A) {
+            sb.append('(');
+            generateParenthesis(A, res, left + 1, right, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        if (left > right) {
+            sb.append(')');
+            generateParenthesis(A, res, left, right + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+}
