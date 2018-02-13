@@ -1,0 +1,28 @@
+public class Solution {
+    public int black(ArrayList<String> A) {
+        int max = 0;
+        for (String str : A) {
+            max = Math.max(str.length(), max);
+        }
+        int res = 0;
+        boolean[][] visited = new boolean[A.size()][max];
+        for (int i = 0; i < A.size(); i++) {
+            for (int j = 0; j < A.get(i).length(); j++) {
+                if (visited[i][j] || A.get(i).charAt(j) == 'O') continue;
+                helper(i, j, visited, A);
+                res++;
+            }
+        }
+        return res;
+    }
+    private void helper(int row, int col, boolean[][] visited, ArrayList<String> A) {
+        if (row < 0 || col < 0 || (row > A.size() - 1) || (col > A.get(row).length() - 1))
+            return;
+        if (visited[row][col] || A.get(row).charAt(col) == 'O') return;
+        visited[row][col] = true;
+        helper(row - 1, col, visited, A);
+        helper(row + 1, col, visited, A);
+        helper(row, col + 1, visited, A);
+        helper(row, col - 1, visited, A);
+    }
+}
