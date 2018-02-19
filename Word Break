@@ -1,0 +1,26 @@
+public class Solution {
+    public int wordBreak(String A, ArrayList<String> B) {
+        if (A == null || B == null) return 0;
+        int len = A.length();
+        boolean[] segment = new boolean[len + 1];
+        segment[0] = true;
+        int maxL = Integer.MIN_VALUE;
+        int minL = Integer.MAX_VALUE;
+        for (String str : B) {
+            int l = str.length();
+            if (l > maxL) maxL = l;
+            if (l < minL) minL = l;
+        }
+        for (int i = minL; i < len + 1; i++) {
+            for (int j = 0; j <= i - minL; j++) {
+                if (j < i - maxL) continue;
+                if (segment[j] && B.contains(A.substring(j, i))) {
+                    segment[i] = true;
+                    break;
+                }
+            }
+        }
+        if (segment[len]) return 1;
+        return 0;
+    }
+}
