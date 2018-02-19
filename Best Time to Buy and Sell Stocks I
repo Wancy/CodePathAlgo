@@ -1,0 +1,18 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public int maxProfit(final List<Integer> A) {
+        if (A == null || A.size() <= 0) return 0;
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        int result = 0;
+        for (int i : A) {
+            max = Math.max(max, i);     
+            if (i < min) {
+                min = i;
+                max = i;
+            }
+            result = Math.max(result, max - min);
+        }
+        return result;
+    }
+}
