@@ -1,0 +1,22 @@
+public class Solution {
+    public int calculateMinimumHP(ArrayList<ArrayList<Integer>> A) {
+        if (A == null || A.size() == 0) return Integer.MAX_VALUE;
+        int row = A.size(), col = A.get(0).size();
+        int[][] res = new int[row][col];
+        if (A.get(row - 1).get(col - 1) < 0)
+            res[row - 1][col - 1] = 1 - A.get(row - 1).get(col - 1);
+        else res[row - 1][col - 1] = 1;
+        for (int i = row - 2; i >= 0; i--) 
+            res[i][col - 1] = Math. max(res[i + 1][col - 1] - A.get(i).get(col - 1), 1);
+        for (int i = col - 2; i >= 0; i--) 
+            res[row - 1][i] = Math.max(res[row - 1][i + 1] - A.get(row - 1).get(i), 1);
+        for (int i = row - 2; i >= 0; i--) {
+            for (int j = col - 2; j >= 0; j--) {
+                int r = Math.max(res[i][j + 1] - A.get(i).get(j), 1);
+                int d = Math.max(res[i + 1][j] - A.get(i).get(j), 1);
+                res[i][j] = Math.min(r, d);
+            }
+        }
+        return res[0][0];
+    }
+}
