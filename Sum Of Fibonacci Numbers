@@ -1,0 +1,23 @@
+public class Solution {
+    public int fibsum(int A) {
+        List<Integer> list = new ArrayList<>();
+        int curr = 1;
+        int prev = 0;
+        while (curr <= A) {
+            list.add(curr);
+            curr = curr + prev;
+            prev = list.get(list.size() - 1);
+        }
+        
+        return helper(A, list.size() - 1, list, 0);
+    }
+    
+    private int helper(int A, int index, List<Integer> list, int count) {
+        while (index >= 0 && list.get(index) > A) {
+            index--;
+        }
+        if (index < 0) return count;
+        if (list.get(index) == A) return 1 + count;
+        return helper(A - list.get(index), index, list, count + 1);
+    }
+}
