@@ -1,0 +1,22 @@
+public class Solution {
+	public TreeNode sortedListToBST(ListNode a) {
+	    return sortedListToBST(a, null);
+	}
+	
+	public TreeNode sortedListToBST(ListNode a, ListNode end) {
+	    if (a == end) return null;
+	    if (a.next == end) return new TreeNode(a.val);
+	    ListNode slow = a;
+	    ListNode fast = a;
+	    while (fast != end && fast.next != end) {
+	        slow = slow.next;
+	        fast = fast.next.next;
+	    }
+	    
+	    TreeNode root = new TreeNode(slow.val);
+	    root.left = sortedListToBST(a, slow);
+	    root.right = sortedListToBST(slow.next, end);
+	    return root;
+	}
+
+}
