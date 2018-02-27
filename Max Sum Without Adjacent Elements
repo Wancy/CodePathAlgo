@@ -1,0 +1,14 @@
+public class Solution {
+    public int adjacent(ArrayList<ArrayList<Integer>> A) {
+        int prev = 0;
+        int curr = 0;
+        int temp = 0;
+        for (int i = 0; i < A.get(0).size(); i++) {
+            int max = Math.max(A.get(0).get(i), A.get(1).get(i));
+            temp = Math.max(prev, curr);
+            curr = prev + max;
+            prev = temp;
+        }
+        return Math.max(curr, prev);
+    }
+}
