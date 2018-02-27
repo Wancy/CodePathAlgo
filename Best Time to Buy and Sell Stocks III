@@ -1,0 +1,16 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public int maxProfit(final List<Integer> A) {
+        int hold1 = Integer.MIN_VALUE;
+        int hold2 = Integer.MIN_VALUE;
+        int sell1 = 0;
+        int sell2 = 0;
+        for (int i : A) {
+            sell2 = Math.max(sell2, hold2 + i);
+            hold2 = Math.max(hold2, sell1 - i);
+            sell1 = Math.max(sell1, hold1 + i);
+            hold1 = Math.max(hold1, -i);
+        }
+        return sell2;
+    }
+}
