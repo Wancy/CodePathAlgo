@@ -1,0 +1,19 @@
+public class Solution {
+    public int canJump(ArrayList<Integer> A) {
+        if (A.size() <= 1) return 1;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
+        boolean[] visited = new boolean[A.size()];
+        visited[0] = true;
+        while (!queue.isEmpty()) {
+            int index = queue.poll();
+            for (int i = 1; i < A.get(index) + 1; i++) {
+                if (index + i >= A.size() - 1) return 1;
+                if (visited[index + i]) continue;
+                queue.add(index + i);
+                visited[index + i] = true;
+            }
+        }
+        return 0;
+    }
+}
