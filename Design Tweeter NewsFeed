@@ -1,0 +1,36 @@
+Design the backend system for the Twitter newsfeed. We want to be able to post tweets, follow other users, and favorite tweets. A user should be able to see a feed of tweets of his/her followers.
+
+
+Scenario
+User post tweets
+User follow other users
+User favorite tweets
+User see a feed of tweets of his/her followers
+
+                 Service
+
+Tweet service                   Friendship Service
+
+Post a tweet                        Follow
+News Feed                          Unfollow
+
+
+Storage
+We can use NoSQL database like Apache Cassandra. Using relational database will need a lot of joins operation since a user may have a lot of tweets, followings or followers and in order to get all these information will join different table many times.
+We can define two objects, User and Tweet
+*User:
+id, username, email, password, followings, followers, tweets
+*Tweet:
+id, content, timestamp, userID
+
+
+Serve Feed
+We can sort the feed from people the user is following by timestamp and show to the user. 
+When the user views timeline, will send a request to get the tweets from all his/her followings and sorted by timestamp of the tweet.
+
+Whenever follow, unfollow, post a tweet, add to the corresponding tables. And remove/add to timelines.
+
+
+Scale
+Use cache to speed up the request. For example, cache a few recent tweets of a user.
+Load balancer and multi-database instance during peek time.
